@@ -112,8 +112,6 @@ export default function AddBooking() {
                         </div>
                     )}
 
-                    {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-
                     {/* show tables if no table is chosen & availableTables have data (conditional rendering)*/}
                     {!selectedTable && availableTables.length > 0 && (
                         <div>
