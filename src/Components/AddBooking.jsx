@@ -12,9 +12,11 @@ export default function AddBooking() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [bookedTableDetails, setBookedTableDetails] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
+    const [searched, setSearched] = useState(false);
 
     const searchTables = async (e) => {
         e.preventDefault();
+        setSearched(true);
 
         if (!datee || !guests) {
             alert("Please enter both date and number of guests.");
@@ -27,7 +29,7 @@ export default function AddBooking() {
             setAvailableTables(response.data);
         } catch (error) {
             console.error("Error fetching free tables", error);
-            setErrorMessage("Error fetching available tables. Please try again later.");
+            setErrorMessage("Error fetching available tables! Please try again.");
         }
     };
 
@@ -53,12 +55,12 @@ export default function AddBooking() {
                     bookingTime: datee,
                 });
             } else {
-                setErrorMessage("Booking failed. Please try again.");
+                setErrorMessage("Failed to book table! Please try again.");
             }
 
         } catch (error) {
             console.error("Error booking table", error);
-            setErrorMessage("An error occurred while booking the table. Please try again.");
+            setErrorMessage("An error occurred while booking the table! Please try again.");
         }
     };
 
@@ -93,7 +95,16 @@ export default function AddBooking() {
                                 />
 
                                 <label htmlFor="guests">Amount of guests:</label>
-                                <input onChange={(e) => setGuests(parseInt(e.target.value))} value={guests} type="number" id="guests" className="form-control" min="1" />
+                                <select onChange={(e) => setGuests(parseInt(e.target.value))} value={guests} type="number" id="guests" className="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                </select>
 
                                 <button type="submit" className="btn btn-outline-primary btn-sm m-4">Search</button>
                             </form>
@@ -111,6 +122,10 @@ export default function AddBooking() {
                             <p><strong>Number of guests:</strong> {guests}</p>
                         </div>
                     )}
+
+                    {/*If no tables are available */}
+                    {searched && availableTables.length == 0 && datee && (<div className="alert alert-danger"><p>Couldn't find free tables. Try another date!</p></div>)}
+
 
                     {/* show tables if no table is chosen & availableTables have data (conditional rendering)*/}
                     {!selectedTable && availableTables.length > 0 && (
@@ -167,6 +182,8 @@ export default function AddBooking() {
                             </form>
                         </div>
                     )}
+
+                    {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                 </>
             )}
 
