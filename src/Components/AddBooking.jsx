@@ -120,6 +120,7 @@ export default function AddBooking() {
                                 minute: '2-digit'
                             })}</p>
                             <p><strong>Number of guests:</strong> {guests}</p>
+                            <p><strong>Table:</strong> {selectedTable}</p>
                         </div>
                     )}
 
@@ -164,6 +165,7 @@ export default function AddBooking() {
                     {selectedTable && (
                         <div>
                             <h2>Enter your details</h2>
+
                             <form onSubmit={bookTable}>
                                 <label htmlFor="name">First Name:</label>
                                 <input type="text" id="name" className="form-control" value={customerName} onChange={(e) => setCustomerName(e.target.value)} required />
