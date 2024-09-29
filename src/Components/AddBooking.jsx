@@ -174,7 +174,7 @@ export default function AddBooking() {
                                 <input type="text" id="lastName" className="form-control" value={customerLastName} onChange={(e) => setCustomerLastName(e.target.value)} required />
 
                                 <label htmlFor="phone">Phone Number:</label>
-                                <input type="tel" id="phone" className="form-control" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+                                <input maxLength="10" type="tel" id="phone" className="form-control" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
 
                                 <button type="submit" className="btn btn-success btn-sm m-4">Book table</button>
                                 {/*make new booking possible by resetting all values.*/}
